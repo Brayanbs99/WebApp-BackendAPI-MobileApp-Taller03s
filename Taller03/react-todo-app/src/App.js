@@ -25,14 +25,15 @@ class App extends React.Component {
                 <TodoItem key={todo.id} text={todo.text}></TodoItem>
               );
             })}
-            {/*this.todos.map(function(todo) {
+            {/*this.todos.map(function(todo) { Esta función y la de arriba son la misma.
               return <TodoItem text={todo.text}></TodoItem>;
             })*/}
           </ul>
           <img src={logo} className="App-logo" alt="logo" />
-          <form>
+          <form onsubmit={this.handleSubmit}>
             <input type="text" value={this.state.newTodo} onChange={this.handleChange}></input>
             <button type="submit">Add Todo</button>
+            <button type='checkbox'>Ready</button>
           </form>  
         </header>
       </div>
@@ -42,15 +43,13 @@ class App extends React.Component {
     this.setState({ newTodo: event.target.value });
   }
 
-  
   handleSubmit = event => {
     event.preventDefault ();
     this.setState(prevState => ({
-      todos: [],
+      todos: [...prevState.todos, {id: Date.now(), text: prevState.newTodo}],
       newTodo: '',
     }));
   } 
 }
-  
 
 export default App;
